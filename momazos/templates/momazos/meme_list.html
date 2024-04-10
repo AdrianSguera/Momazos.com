@@ -1,0 +1,14 @@
+{% extends 'momazos/base.html' %}
+
+{% block content %}
+    {% for meme in memes %}
+        <article class="meme">
+            <h5>by {{ meme.author }}</h5>
+            <time class="date">
+                {{ meme.date }}
+            </time>
+            <h3><a href="{% url 'meme_detail' meme.pk %}">{{ meme.description }}</a></h3>
+            <img src="{{ meme.image.url }}" alt="{{ meme.description }}">
+        </article>
+    {% endfor %}
+{% endblock %}
