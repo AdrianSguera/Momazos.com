@@ -41,7 +41,7 @@
 
 .like-content{
     display: flex;
-    align-items: center;
+    justify-content: right;
 }
 
 .comment-box button, .comment button {

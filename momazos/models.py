@@ -9,9 +9,7 @@ class Meme(models.Model):
     date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to='memes/')
     likes = models.ManyToManyField(User, related_name='liked_memes', blank=True)
-    dislikes = models.ManyToManyField(User, related_name='disliked_memes', blank=True)
     likes_count = models.IntegerField(default=0)
-    dislikes_count = models.IntegerField(default=0)
 
 class Comment(models.Model):
     meme = models.ForeignKey(Meme, on_delete=models.CASCADE)

@@ -127,19 +127,3 @@ def like_meme(request, meme_id):
         return JsonResponse({'likes_count': meme.likes_count, 'liked': liked})
     else:
         return JsonResponse({'error': 'User not authenticated'})
-
-def dislike_meme(request, meme_id):
-    meme = get_object_or_404(Meme, pk=meme_id)
-    if request.user.is_authenticated:
-        if request.user in meme.dislikes.all():
-            meme.dislikes.remove(request.user)
-            meme.dislikes_count -= 1
-            disliked = False
-        else:
-            meme.dislikes.add(request.user)
-            meme.dislikes_count += 1
-            disliked = True
-        meme.save()
-        return JsonResponse({'dislikes_count': meme.dislikes_count, 'disliked': disliked})
-    else:
-        return JsonResponse({'error': 'User not authenticated'})
