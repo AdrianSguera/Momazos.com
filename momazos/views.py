@@ -127,3 +127,12 @@ def like_meme(request, meme_id):
         return JsonResponse({'likes_count': meme.likes_count, 'liked': liked})
     else:
         return JsonResponse({'error': 'User not authenticated'})
+    
+def manage_memes(request):
+    memes = Meme.objects.filter(author=request.user)
+    return render(request, 'momazos/manage_memes.html', {'memes': memes})
+
+def delete_meme(request, meme_id):
+    meme = get_object_or_404(Meme, pk=meme_id)
+    meme.delete()
+    return redirect('manage_memes')

@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'momazos',
@@ -84,9 +84,9 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
     }
-}
+}'''
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'adrianSguera$db',
@@ -95,7 +95,7 @@ DATABASES = {
         'HOST': 'adrianSguera.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
-}'''
+}
 
 
 # Password validation

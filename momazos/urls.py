@@ -16,4 +16,6 @@ urlpatterns = [
     path('register/', views.register_view, name='register'),
     path('delete_comment/<int:comment_id>/<int:meme_id>/', views.delete_comment, name='delete_comment'),
     path('like/<int:meme_id>/', views.like_meme, name='like_meme'),
+    path('manage_memes/', views.manage_memes, name='manage_memes'),
+    path('delete_meme/<int:meme_id>/', views.delete_meme, name='delete_meme'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

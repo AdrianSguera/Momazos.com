@@ -44,7 +44,7 @@
     justify-content: right;
 }
 
-.comment-box button, .comment button {
+.comment-box button, .comment button, .delete-box button {
     float: right;
     background-color: brown;
     color: white;
@@ -55,11 +55,16 @@
     font-size: 16px;
 }
 
-.comment-box button:hover, .comment button:hover {
+.comment-box button:hover, .comment button:hover, .delete-box button:hover {
     background-color: rgb(109, 29, 29);
 }
 
 .comment button a {
     text-decoration: none;
     color: #fff;
+}
+
+.delete-box{
+    display: flex;
+    justify-content: left;
 }
