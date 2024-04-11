@@ -18,13 +18,16 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         fields = '__all__'
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
 
 class MemeForm(forms.ModelForm):
     class Meta:
         model = Meme
         fields = ['image', 'description']
+        labels = {
+            'image': 'Choose file:',
+            'description': 'Description:',
+        }
         

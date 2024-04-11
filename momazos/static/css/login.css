@@ -1,40 +1,49 @@
-form.login-form {
-    max-width: 300px; /* Ancho máximo del formulario */
-    margin: 0 auto; /* Centrar el formulario horizontalmente */
-    padding: 20px; /* Espacio interior del formulario */
-    border: 1px solid #ccc; /* Borde del formulario */
-    border-radius: 5px; /* Borde redondeado */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+.login-container{
+    margin-top: 50px;
 }
 
-/* Estilos para los campos de entrada */
-form.login-form input[type="text"],
-form.login-form input[type="password"] {
-    width: 100%; /* Ancho completo del campo de entrada */
-    padding: 10px; /* Espacio interior del campo de entrada */
-    margin-bottom: 10px; /* Espacio entre campos de entrada */
-    border: 1px solid #ccc; /* Borde del campo de entrada */
-    border-radius: 5px; /* Borde redondeado */
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para las etiquetas */
-form.login-form label {
-    font-weight: bold; /* Fuente en negrita */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-/* Estilos para el botón de envío */
-form.login-form button[type="submit"] {
-    width: 100%; /* Ancho completo del botón */
-    padding: 10px; /* Espacio interior del botón */
-    background-color: brown; /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Borde redondeado */
-    cursor: pointer; /* Cursor de apuntar */
-    transition: background-color 0.3s; /* Transición suave del color de fondo */
+.login-form label {
+    font-weight: bold;
 }
 
-/* Estilo de hover para el botón de envío */
-form.login-form button[type="submit"]:hover {
-    background-color: rgb(109, 29, 29); /* Cambiar el color de fondo al pasar el ratón */
+.login-form button[type="submit"], .login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: brown;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button[type="submit"]:hover, .login-form button:hover {
+    background-color: rgb(109, 29, 29);
+}
+
+.login-form button{
+    margin-top: 10px;
+}
+
+.login-form button a{
+    text-decoration: none;
+    color: #fff;
 }
