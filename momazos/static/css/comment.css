@@ -39,7 +39,12 @@
     font-family: Arial, sans-serif;
 }
 
-.comment-box button {
+.like-content{
+    display: flex;
+    align-items: center;
+}
+
+.comment-box button, .comment button {
     float: right;
     background-color: brown;
     color: white;
@@ -50,6 +55,11 @@
     font-size: 16px;
 }
 
-.comment-box button:hover {
+.comment-box button:hover, .comment button:hover {
     background-color: rgb(109, 29, 29);
+}
+
+.comment button a {
+    text-decoration: none;
+    color: #fff;
 }
