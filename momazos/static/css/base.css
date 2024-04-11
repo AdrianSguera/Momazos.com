@@ -23,3 +23,14 @@ body{
     height: auto;
     margin-left: 20px;
 }
+
+button.logout-btn {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+button.logout-btn img {
+    width: 30px;
+    height: auto;
+}

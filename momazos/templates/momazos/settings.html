@@ -1,0 +1,27 @@
+{% extends 'momazos/base.html' %}
+
+{% block content %}
+<div class="settings">
+    <button>
+        <a href="{% url 'new_meme' %}">
+            New meme
+        </a>
+    </button>
+    <button>
+        <a href="{% url 'new_username' %}">
+            Change username
+        </a>
+    </button>
+    <button>
+        <a href="{% url 'new_password' %}">
+            Change password
+        </a>
+    </button>
+    <form method="post" action="{% url 'delete_account' %}">
+        {% csrf_token %}
+        <button type="submit">
+            Delete account
+        </button>
+    </form>
+</div>
+{% endblock %}

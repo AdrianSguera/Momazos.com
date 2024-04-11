@@ -8,12 +8,31 @@
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/meme.css' %}">
         <link rel="stylesheet" href="{% static 'css/comment.css' %}">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" href="{% static 'css/settings.css' %}">
     </head>
     <body>
         <header class="page-header">
           <div class="container">
-              <h1><a href="/">Momazos.com</a></h1>
-              <img src="{% static 'img/glasses.png' %}" alt="{logo}">
+                <h1><a href="/">Momazos.com</a></h1>
+                <img src="{% static 'img/glasses.png' %}" alt="{logo}">
+                {% if user.is_authenticated %}
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-btn">
+                            <img src="{% static 'img/log-out.png' %}" alt="Logout">
+                        </button>
+                    </form>
+                    <a href="{% url 'user_settings' %}">
+                        <img src="{% static 'img/setting.png' %}" alt="Settings" style="width: 30px; height: auto;">
+                    </a>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="top-menu">
+                        <img src="{% static 'img/login.png' %}" alt="Login" style="width: 50px; height: auto;">
+                    </a>
+                {% endif %}
+            </article>
           </div>
         </header>
         <main class="container">

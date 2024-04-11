@@ -1,0 +1,25 @@
+.settings {
+    max-width: 300px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrar el contenedor horizontalmente */
+}
+
+.settings button, .settings form button {
+    display: block; /* Hacer que los botones sean elementos de bloque */
+    margin-bottom: 10px; /* Espacio entre botones */
+    text-align: center; /* Centrar el texto dentro de los botones */
+    justify-content: center;
+}
+
+.settings button a {
+    display: block; /* Hacer que los enlaces sean elementos de bloque */
+    padding: 10px; /* Espacio interior de los enlaces */
+    background-color: brown; /* Color de fondo de los enlaces */
+    color: #fff; /* Color del texto de los enlaces */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Borde redondeado */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+
+.settings button a:hover {
+    background-color: rgb(109, 29, 29);
+}
