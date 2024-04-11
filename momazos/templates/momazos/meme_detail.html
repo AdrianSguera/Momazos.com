@@ -1,11 +1,27 @@
 {% extends 'momazos/base.html' %}
 
 {% block content %}
-        <article class="meme">
+    <article class="meme">
+        <time class="date">
+            {{ meme.date }}
+        </time>
+        <h2><a href="{% url 'meme_detail' meme.pk %}">{{ meme.description }}</a></h2>
+        <img src="{{ meme.image.url }}" alt="{{ meme.description }}">
+    </article>
+    <article class="comment-box">
+        <form method="post">
+            {% csrf_token %}
+            <textarea name="text" placeholder="Leave your comment!"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </article>
+    {% for comment in comments %}
+        <article class="comment">
             <time class="date">
-                {{ meme.date }}
+              {{ comment.date }}
             </time>
-            <h2><a href="{% url 'meme_detail' meme.pk %}">{{ meme.description }}</a></h2>
-            <img src="{{ meme.image.url }}" alt="{{ meme.description }}">
+            <h4>{{ comment.author }}</h4>
+            <h5>{{ comment.text }}</h5>
         </article>
+    {% endfor %}
 {% endblock %}

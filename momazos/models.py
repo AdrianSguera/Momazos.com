@@ -16,3 +16,9 @@ class Like(models.Model):
 class Dislike(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     meme = models.ForeignKey(Meme, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    meme = models.ForeignKey(Meme, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField(max_length=200)
+    date = models.DateTimeField(default=timezone.now)
