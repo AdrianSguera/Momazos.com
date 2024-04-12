@@ -3,7 +3,7 @@
 }
 
 .login-form {
-    max-width: 300px;
+    max-width: auto;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;

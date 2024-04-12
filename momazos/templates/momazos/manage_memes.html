@@ -1,0 +1,70 @@
+{% extends 'momazos/base.html' %}
+{% load static %}
+
+{% block content %}
+    {% for meme in memes %}
+    <article class="meme">
+        <h5>by {{ meme.author }}</h5>
+        <time class="date">
+            {{ meme.date }}
+        </time>
+        <h3><a href="{% url 'meme_detail' meme.pk %}">{{ meme.description }}</a></h3>
+        <img src="{{ meme.image.url }}" alt="{{ meme.description }}" class="meme-img">
+        <div class="like-content">
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'like_meme' meme.pk %}" method="post" class="like-form">
+            {% csrf_token %}
+            <button type="submit" class="like-button" data-action="{% url 'like_meme' meme.pk %}">
+                {% if request.user in meme.likes.all %}
+                    <img src="{% static 'img/likeoff.png' %}" alt="Unlike">
+                    <p><span class="likes-count">{{ meme.likes_count }}</span></p>
+                {% else %}
+                    <img src="{% static 'img/likeon.png' %}" alt="Like">
+                    <p><span class="likes-count">{{ meme.likes_count }}</span></p>
+                {% endif %}
+            </button>
+        </form>
+        {% else %}
+            <img src="{% static 'img/likeoff.png' %}" alt="Likes" class="off-btn">
+            <p><span id="likes-count">{{ meme.likes_count }}</span></p>
+        {% endif %}
+        </div>
+        <article class="delete-box">
+            <form action="{% url 'delete_meme' meme.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="like-button">
+                    Delete meme
+                </button>
+            </form>
+        </article>
+    </article>
+    {% endfor %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.like-button').click(function(event) {
+            event.preventDefault();
+            var url = $(this).data('action');
+            var button = $(this);
+            var csrftoken = $('[name=csrfmiddlewaretoken]').val();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    csrfmiddlewaretoken: csrftoken
+                },
+                success: function(data) {
+                    button.closest('.like-form').find('.likes-count').text(data.likes_count);
+                    if (data.liked) {
+                        button.find('img').attr('src', '{% static "img/likeoff.png" %}');
+                        button.attr('title', 'Unlike');
+                    } else {
+                        button.find('img').attr('src', '{% static "img/likeon.png" %}');
+                        button.attr('title', 'Like');
+                    }
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

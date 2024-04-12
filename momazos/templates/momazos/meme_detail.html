@@ -1,4 +1,5 @@
 {% extends 'momazos/base.html' %}
+{% load static %}
 
 {% block content %}
 <article class="meme">
@@ -7,8 +8,30 @@
         {{ meme.date }}
     </time>
     <h3><a href="{% url 'meme_detail' meme.pk %}">{{ meme.description }}</a></h3>
-    <img src="{{ meme.image.url }}" alt="{{ meme.description }}">
+    <img src="{{ meme.image.url }}" alt="{{ meme.description }}" class="meme-img">
+    <div class="like-content">
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'like_meme' meme.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="like-button">
+            {% if request.user in meme.likes.all %}
+                <img src="{% static 'img/likeoff.png' %}" alt="Unlike">
+                <p><span id="likes-count">{{ meme.likes_count }}</span></p>
+            {% else %}
+                <img src="{% static 'img/likeon.png' %}" alt="Like">
+                <p><span id="likes-count">{{ meme.likes_count }}</span></p>
+            {% endif %}
+        </button>
+    </form>
+    {% else %}
+        <button class="like-button">
+            <img src="{% static 'img/likeoff.png' %}" alt="Likes">
+            <p><span id="likes-count">{{ meme.likes_count }}</span></p>
+        </button>
+    {% endif %}
+    </div>
 </article>
+{% if request.user.is_authenticated %}
 <article class="comment-box">
     <form method="post">
         {% csrf_token %}
@@ -16,6 +39,7 @@
         <button type="submit">Send</button>
     </form>
 </article>
+{% endif %}
 {% for comment in comments %}
 <article class="comment">
     <time class="date">
@@ -23,6 +47,42 @@
     </time>
     <h4>{{ comment.author }}</h4>
     <h5>{{ comment.text }}</h5>
+    {% if comment.author == request.user %}
+    <button>
+        <a href="{% url 'delete_comment' comment.pk meme.pk %}">Delete</a>
+    </button>
+    {% endif %}
 </article>
 {% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.like-button').click(function(event) {
+            event.preventDefault();
+            var url = $(this).closest('form').attr('action');
+            var button = $(this);
+            var csrftoken = $('[name=csrfmiddlewaretoken]').val();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    csrfmiddlewaretoken: csrftoken
+                },
+                success: function(data) {
+                    $('#likes-count').text(data.likes_count);
+                    if (data.liked) {
+                        button.find('img').attr('src', '{% static "img/likeoff.png" %}');
+                        button.attr('title', 'Unlike');
+                        button.closest('form').attr('action', '{% url "like_meme" meme.pk %}');
+                    } else {
+                        button.find('img').attr('src', '{% static "img/likeon.png" %}');
+                        button.attr('title', 'Like');
+                        button.closest('form').attr('action', '{% url "like_meme" meme.pk %}');
+                    }
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -39,4 +39,14 @@
     margin: 0 auto;
     margin-top: 10px;
   }
+
+  .meme button img {
+    width: 30px;
+    height: auto;
+  }
+
+  .meme button {
+    border: none;
+    background-color:rgb(253, 252, 248);
+  }
   

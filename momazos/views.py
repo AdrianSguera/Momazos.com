@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
 
 def meme_list(request):
     memes = Meme.objects.filter(date__lte=timezone.now()).order_by('-date')
@@ -105,3 +106,33 @@ def delete_account(request):
         return redirect('meme_list')
     else:
         return redirect('meme_list')
+    
+def delete_comment(request, comment_id, meme_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete()
+    return redirect('meme_detail', meme_id=meme_id)
+
+def like_meme(request, meme_id):
+    meme = get_object_or_404(Meme, pk=meme_id)
+    if request.user.is_authenticated:
+        if request.user in meme.likes.all():
+            meme.likes.remove(request.user)
+            meme.likes_count -= 1
+            liked = False
+        else:
+            meme.likes.add(request.user)
+            meme.likes_count += 1
+            liked = True
+        meme.save()
+        return JsonResponse({'likes_count': meme.likes_count, 'liked': liked})
+    else:
+        return JsonResponse({'error': 'User not authenticated'})
+    
+def manage_memes(request):
+    memes = Meme.objects.filter(author=request.user)
+    return render(request, 'momazos/manage_memes.html', {'memes': memes})
+
+def delete_meme(request, meme_id):
+    meme = get_object_or_404(Meme, pk=meme_id)
+    meme.delete()
+    return redirect('manage_memes')
