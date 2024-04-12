@@ -31,6 +31,7 @@
     {% endif %}
     </div>
 </article>
+{% if request.user.is_authenticated %}
 <article class="comment-box">
     <form method="post">
         {% csrf_token %}
@@ -38,6 +39,7 @@
         <button type="submit">Send</button>
     </form>
 </article>
+{% endif %}
 {% for comment in comments %}
 <article class="comment">
     <time class="date">
