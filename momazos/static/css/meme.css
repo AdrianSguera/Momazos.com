@@ -40,7 +40,7 @@
     margin-top: 10px;
   }
 
-  .meme button img, .off-btn {
+  .meme button img {
     width: 30px;
     height: auto;
   }

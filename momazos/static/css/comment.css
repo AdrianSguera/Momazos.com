@@ -68,3 +68,7 @@
     display: flex;
     justify-content: left;
 }
+
+.like-off {
+    display: block;
+}
