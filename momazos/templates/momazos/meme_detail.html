@@ -24,8 +24,10 @@
         </button>
     </form>
     {% else %}
-        <img src="{% static 'img/likeoff.png' %}" alt="Likes" class="off-btn">
-        <p><span id="likes-count">{{ meme.likes_count }}</span></p>
+        <button class="like-button">
+            <img src="{% static 'img/likeoff.png' %}" alt="Likes">
+            <p><span id="likes-count">{{ meme.likes_count }}</span></p>
+        </button>
     {% endif %}
     </div>
 </article>
